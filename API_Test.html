@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        #demo{
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            padding:20px 30px;
+
+
+        }
+        .dem1{
+            /* margin:0 auto; */
+            display: flex;
+            justify-content:space-evenly;
+            margin:20px;
+            max-width:100%;
+            height:300px;
+            background-color: burlywood;
+        }
+        
+        .dem1 img{
+          
+           border-radius: 12px 12px;
+            width:250px;
+            height:250px;
+        }
+        .dem1-con{
+          
+            position:relative;
+            float: left;
+        }
+        .img-div{
+            padding:20px 30px;
+            
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play with local Json data and render on web</title>
+</head>
+<body>
+    
+    
+
+    <div id="demo">
+
+    </div>
+
+    <div id="demo3">
+
+    </div>
+
+
+    <script src="test.js"></script>
+    <script>
+
+    //Here I make a separete .json file and fetch the data using fetch() method
+    //Also for error detection use async() to detect in which line the error occurs
+
+    const dt2 = fetch("test1.json")
+    // dt2.then(async res=>{
+    //     try{
+    //         const dt = await res.json()
+    //         console.log(data)
+    //     }
+    //     catch(error){
+    //         console.log("error happened ")
+    //         console.log(error)
+    //     }
+    // })
+    
+    dt2.then(res=>res.json()).then(l =>{
+        console.log(l)
+        console.log(l.length)
+        document.getElementById("demo3").innerHTML=`
+        <h1>${l.length}</h1>
+        ${l.map((u)=>{
+
+            return `
+            <h1>${u.name}</h1>`
+
+        }).join('')}
+        `
+        
+    })
+  
+  
+
+    //Here fetch the data from another javascript file  and method very simple with getelementbyid and template literals
+
+        document.getElementById("demo").innerHTML = `
+        hello
+        <h1>
+        ${data.length}
+        </h1>
+        ${data.map((po)=>{
+
+            return `<div class="dem1">
+                <div class="img-div">
+                <img src="${po.image}">
+                </div>
+
+                <div class="dem1-con">
+                <h2>${po.name}<span>(${po.id})</span></h2>
+                </div>
+                </div>`
+        }).join('')}
+
+        `
+        //NOTES:-
+        //  <h2> ${data.join('')}</h2>  ->  data.join('') give break between the objects
+
+
+    
+    </script>
+</body>
+</html>
